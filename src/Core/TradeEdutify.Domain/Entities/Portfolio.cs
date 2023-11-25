@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TradeEdutify.Domain.Entities
 {
+    [Table("Portfolio")]
     public class Portfolio
     {
         public Guid PortfolioID { get; set; }

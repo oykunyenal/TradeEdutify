@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TradeEdutify.Domain.Entities
 {
+    [Table("Transaction")]
     public class Transaction
     {
         public Guid TransactionID { get; set; }
@@ -17,7 +19,6 @@ namespace TradeEdutify.Domain.Entities
         [RegularExpression(@"^\d+\.\d{2}$", ErrorMessage = "The TotalOperationPrice should be exactly 2 decimal digits.")]
         public decimal TotalOperationPrice { get; set; }
     }
-
 
     public enum TradeType
     {

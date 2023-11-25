@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TradeEdutify.Domain.Entities
 {
+    [Table("Share")]
     public class Share
     {
+
+        public Share()
+        {
+            this.Transactions = new List<Transaction>();
+            this.Portfolios = new List<Portfolio>();
+        }
+
         public Guid ShareID { get; set; }
 
         [RegularExpression(@"^[A-Z]{3}$", ErrorMessage = "Symbol should be a three-character capital letter.")]
