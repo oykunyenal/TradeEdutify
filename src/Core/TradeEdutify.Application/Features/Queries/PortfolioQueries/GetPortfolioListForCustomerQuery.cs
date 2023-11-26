@@ -10,10 +10,10 @@ namespace TradeEdutify.Application.Features.Queries.PortfolioQueries
 {
     public class GetPortfolioListForCustomerQuery : IRequest<ApiServiceResponse>
     {
-        public long UserID { get; set; }
-        public GetPortfolioListForCustomerQuery(long UserID)
+        public string Username { get; set; }
+        public GetPortfolioListForCustomerQuery(string Username)
         {
-            this.UserID = UserID;
+            this.Username = Username;
         }
     }
 }

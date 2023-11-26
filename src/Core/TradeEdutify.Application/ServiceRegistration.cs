@@ -26,8 +26,6 @@ namespace TradeEdutify.Application
             services.AddSingleton<ITokenService, TokenService>();
 
             services.AddTransient<IValidator<UserDto>, UserValidator>();
-            services.AddTransient<IValidator<TransactionDto>, TransactionValidator>();
-            services.AddTransient<IValidator<PortfolioDto>, PortfolioValidator>();
             services.AddTransient<IValidator<ShareDto>, ShareValidator>();
             services.AddTransient<IValidator<List<ShareDto>>, ShareListValidator>();
         }

@@ -38,5 +38,27 @@ namespace TradeEdutify.Persistence.Repositories
                 .OrderByDescending(s => s.LastUpdateDate)
                 .FirstOrDefaultAsync();
         }
+
+
+        public bool ShareUpdateAvailable(List<Share> entityList)
+        {
+            foreach (var item in entityList)
+            {
+                var selectedShareItem = GetShareBySymbol(item.Symbol).Result;
+
+                if (selectedShareItem is null)
+                {
+                    return true;
+                }
+
+                var elapsedTime = DateTime.UtcNow - selectedShareItem.LastUpdateDate;
+
+                if (elapsedTime.TotalHours < 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

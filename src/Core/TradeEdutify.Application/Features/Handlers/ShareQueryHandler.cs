@@ -64,7 +64,24 @@ namespace TradeEdutify.Application.Features.Handlers
                 return Task.FromResult(apiServiceResponse).Result;
             }
 
+            request.ShareList.ForEach(item => item.LastUpdateDate = DateTime.UtcNow);
+
             var shareListOnUpdate = mapper.Map<List<Share>>(request.ShareList);
+
+            var isShareUpdateAvailable = shareRepository.ShareUpdateAvailable(shareListOnUpdate);
+
+            if (!isShareUpdateAvailable)
+            {
+                apiServiceResponse = new ApiServiceResponse
+                {
+                    Message = "Share update can be done every 1 hour period",
+                    Result = false,
+                    Object = null
+                };
+
+                return Task.FromResult(apiServiceResponse).Result;
+            }
+
 
             var updatedShareList = await shareRepository.UpdateShare(shareListOnUpdate);
 
@@ -149,6 +166,20 @@ namespace TradeEdutify.Application.Features.Handlers
                 apiServiceResponse = new ApiServiceResponse
                 {
                     Message = "There is no available share to buy",
+                    Result = false,
+                    Object = null
+                };
+
+                return Task.FromResult(apiServiceResponse).Result;
+            }
+
+            var isShareExistInPortfolioForUser = await portfolioRepository.CheckShareExistInPortfolioForUser(user.UserID, availableShareToBuy.ShareID);
+
+            if (!isShareExistInPortfolioForUser)
+            {
+                apiServiceResponse = new ApiServiceResponse
+                {
+                    Message = "User has no registered share in his/her portfolio",
                     Result = false,
                     Object = null
                 };
@@ -260,6 +291,20 @@ namespace TradeEdutify.Application.Features.Handlers
                 return Task.FromResult(apiServiceResponse).Result;
             }
 
+            var isPortfolioExistForUser = await portfolioRepository.CheckPortfolioExistForUser(user.UserID);
+
+            if (!isPortfolioExistForUser)
+            {
+                apiServiceResponse = new ApiServiceResponse
+                {
+                    Message = "User has no registered portfolio",
+                    Result = false,
+                    Object = null
+                };
+
+                return Task.FromResult(apiServiceResponse).Result;
+            }
+
             var availableShareToBuy = await shareRepository.GetShareBySymbol(request.ShareTransactionRequestModel.Symbol);
 
             if (availableShareToBuy is null)
@@ -274,11 +319,9 @@ namespace TradeEdutify.Application.Features.Handlers
                 return Task.FromResult(apiServiceResponse).Result;
             }
 
-            var mappedUser = mapper.Map<UserDto>(user);
-
             var mappedShare = mapper.Map<ShareDto>(availableShareToBuy);
 
-            int availableShareCount = await transactionRepository.GetAvailableShareLimitForUser(mappedUser.UserID, mappedShare.ShareID);
+            int availableShareCount = await transactionRepository.GetAvailableShareLimitForUser(user.UserID, mappedShare.ShareID);
 
             if (availableShareCount < request.ShareTransactionRequestModel.Quantity)
             {
@@ -300,7 +343,7 @@ namespace TradeEdutify.Application.Features.Handlers
                 TotalOperationPrice = mappedShare.Rate * request.ShareTransactionRequestModel.Quantity,
                 TradeType = Domain.Enums.TradeType.SELL,
                 UnitPrice = mappedShare.Rate,
-                UserID = mappedUser.UserID,
+                UserID = user.UserID,
             };
 
             var transactionAddResult = await transactionRepository.AddTransaction(transaction);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TradeEdutify.Application.Interfaces.Repositories;
+using TradeEdutify.Application.Parameters.ResponseParameters;
 using TradeEdutify.Domain.Entities;
 using TradeEdutify.Persistence.Context;
 
@@ -24,6 +25,32 @@ namespace TradeEdutify.Persistence.Repositories
             await _dbContext.Set<Portfolio>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
+        }
+
+        public async Task<bool> CheckPortfolioExistForUser(long UserID)
+        {
+            return await _dbContext.Portfolios.AnyAsync(q => q.UserID == UserID);
+        }
+
+        public async Task<bool> CheckShareExistInPortfolioForUser(long UserID, long ShareID)
+        {
+            return await _dbContext.Portfolios.AnyAsync(q => q.UserID == UserID && q.ShareID == ShareID);
+        }
+
+        public async Task<List<Portfolio>> GetPortfolioListForUser(string Username)
+        {
+            var portfolioList = _dbContext.Portfolios
+                .Join(
+                    _dbContext.Users,
+                    portfolio => portfolio.UserID,
+                    user => user.UserID,
+                    (portfolio, user) => new { Portfolio = portfolio, User = user }
+                )
+                .Where(joinResult => joinResult.User.Username == Username)
+                .Select(joinResult => joinResult.Portfolio)
+                .ToList();
+
+            return portfolioList;
         }
     }
 }
