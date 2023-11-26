@@ -17,7 +17,7 @@ namespace TradeEdutify.Application.Dtos
         }
         public long ShareID { get; set; }
         public string Symbol { get; set; } = string.Empty;
-        public decimal Rate { get; set; }
+        public double Rate { get; set; }
         public DateTimeOffset LastUpdateDate { get; set; }
         public List<TransactionDto>? TransactionDtoList { get; set; }
         public List<PortfolioDto>? PortfolioDtoList { get; set; }

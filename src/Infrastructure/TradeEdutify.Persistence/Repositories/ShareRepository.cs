@@ -30,5 +30,13 @@ namespace TradeEdutify.Persistence.Repositories
         {
             return await _dbContext.Shares.AsNoTracking().ToListAsync();
         }
+
+        public async Task<Share> GetShareBySymbol(string Symbol)
+        {
+            return await _dbContext.Shares
+                .Where(q => q.Symbol.Equals(Symbol))
+                .OrderByDescending(s => s.LastUpdateDate)
+                .FirstOrDefaultAsync();
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace TradeEdutify.API.Controllers
 
         private readonly IMediator mediator;
         private ApiServiceResponse apiServiceResponse;
+        private string userClaim;
 
         public ShareController(IMediator mediator)
         {
@@ -56,7 +57,9 @@ namespace TradeEdutify.API.Controllers
         [HttpPost("BuyShare")]
         public async Task<IActionResult> BuyShare(ShareTransactionRequestModel shareTransactionRequestModel)
         {
-            var BuyShareQuery = new BuyShareQuery(shareTransactionRequestModel);
+            userClaim = HttpContext.User.Claims.FirstOrDefault().Value;
+
+            var BuyShareQuery = new BuyShareQuery(shareTransactionRequestModel, userClaim);
 
             apiServiceResponse = await mediator.Send(BuyShareQuery);
 
@@ -71,7 +74,9 @@ namespace TradeEdutify.API.Controllers
         [HttpPost("SellShare")]
         public async Task<IActionResult> SellShare(ShareTransactionRequestModel shareTransactionRequestModel)
         {
-            var SellShareQuery = new SellShareQuery(shareTransactionRequestModel);
+            userClaim = HttpContext.User.Claims.FirstOrDefault().Value;
+
+            var SellShareQuery = new SellShareQuery(shareTransactionRequestModel, userClaim);
 
             apiServiceResponse = await mediator.Send(SellShareQuery);
 

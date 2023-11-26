@@ -11,5 +11,6 @@ namespace TradeEdutify.Application.Interfaces.Repositories
     {
         Task<List<Share>> UpdateShare(List<Share> entityList);
         Task<List<Share>> GetShareList();
+        Task<Share> GetShareBySymbol(string Symbol);
     }
 }

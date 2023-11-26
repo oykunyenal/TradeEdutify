@@ -117,11 +117,11 @@ namespace TradeEdutify.Persistence.Migrations
                 columns: new[] { "UserID", "Username" },
                 values: new object[,]
                 {
-                    { 100L, "Ethan Hayes" },
-                    { 101L, "Olivia Foster" },
-                    { 102L, "Amelia Rodriguez" },
-                    { 103L, "Sophia Chang" },
-                    { 104L, "Jackson Bennett" }
+                    { 100L, "EthanHayes" },
+                    { 101L, "OliviaFoster" },
+                    { 102L, "AmeliaRodriguez" },
+                    { 103L, "SophiaChang" },
+                    { 104L, "JacksonBennett" }
                 });
 
             migrationBuilder.CreateIndex(
