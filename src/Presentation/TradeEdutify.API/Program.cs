@@ -4,6 +4,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using TradeEdutify.Application;
+using TradeEdutify.Application.Exceptions;
+using TradeEdutify.Application.Extensions;
 using TradeEdutify.Persistence;
 using TradeEdutify.Persistence.Context;
 
@@ -74,6 +76,10 @@ app.UseCors(x => x
         .AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader());
+
+
+app.UseMiddleware<ExceptionMiddleware>();
+LoggingExtension.ConfigureSerilogLogger(builder.Configuration);
 
 if (app.Environment.IsDevelopment())
 {
