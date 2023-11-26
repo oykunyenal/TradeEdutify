@@ -20,6 +20,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Core\TradeEdutify.Application\TradeEdutify.Application.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\TradeEdutify.Persistence\TradeEdutify.Persistence.csproj" />
 	</ItemGroup>
 
