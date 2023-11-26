@@ -14,12 +14,12 @@ namespace TradeEdutify.Application.Services
     {
         private const string SecretKey = "5db61e4cd8776c7969cfd62456da639a4c87683a:8763434884872";
         private static readonly byte[] SecretBytes = Encoding.UTF8.GetBytes(SecretKey);
-        public string GenerateToken(long UserID)
+        public string GenerateToken(string Username)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var claims = new ClaimsIdentity(new[]
             {
-            new Claim(ClaimTypes.NameIdentifier, UserID.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, Username),
         });
 
             var tokenDescriptor = new SecurityTokenDescriptor

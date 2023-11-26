@@ -8,6 +8,6 @@ namespace TradeEdutify.Application.Interfaces.Services
 {
     public interface ITokenService
     {
-        string GenerateToken(long UserID);
+        string GenerateToken(string Username);
     }
 }

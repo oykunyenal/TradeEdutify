@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TradeEdutify.Application.Dtos;
@@ -9,7 +10,7 @@ using TradeEdutify.Application.Parameters.RequestParameters;
 namespace TradeEdutify.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController, Authorize]
     public class ShareController : ControllerBase
     {
 
