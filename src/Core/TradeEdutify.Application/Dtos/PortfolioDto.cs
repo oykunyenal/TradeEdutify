@@ -8,9 +8,9 @@ namespace TradeEdutify.Application.Dtos
 {
     public record PortfolioDto
     {
-        public Guid PortfolioID { get; set; }
+        public long PortfolioID { get; set; }
         public DateTimeOffset OperationDate { get; set; }
-        public Guid UserID { get; set; }
-        public Guid ShareID { get; set; }
+        public long UserID { get; set; }
+        public long ShareID { get; set; }
     }
 }

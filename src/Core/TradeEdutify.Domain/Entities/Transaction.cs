@@ -7,17 +7,18 @@ namespace TradeEdutify.Domain.Entities
     [Table("Transaction")]
     public class Transaction
     {
-        public Guid TransactionID { get; set; }
+        [Key]
+        public long TransactionID { get; set; }
         public TradeType TradeType { get; set; }
-        public Guid ShareID { get; set; }
-        public Guid UserID { get; set; }
+        public long ShareID { get; set; }
+        public long UserID { get; set; }
         public DateTimeOffset OperationDate { get; set; }
 
-        [RegularExpression(@"^\d+\.\d{2}$", ErrorMessage = "The UnitPrice should be exactly 2 decimal digits.")]
-        public decimal UnitPrice { get; set; }
+        [RegularExpression(@"^\d+\.\d{2}$", ErrorMessage = "The UnitPrice should be exactly 2 double digits.")]
+        public double UnitPrice { get; set; }
         public int Quantity { get; set; }
 
-        [RegularExpression(@"^\d+\.\d{2}$", ErrorMessage = "The TotalOperationPrice should be exactly 2 decimal digits.")]
-        public decimal TotalOperationPrice { get; set; }
+        [RegularExpression(@"^\d+\.\d{2}$", ErrorMessage = "The TotalOperationPrice should be exactly 2 double digits.")]
+        public double TotalOperationPrice { get; set; }
     }
 }

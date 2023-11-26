@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,9 @@ namespace TradeEdutify.Domain.Entities
             this.Transactions = new List<Transaction>();
             this.Portfolios = new List<Portfolio>();
         }
-        public Guid UserID { get; set; }
+
+        [Key]
+        public long UserID { get; set; }
         public string Username { get; set; } = string.Empty;
         public ICollection<Transaction>? Transactions { get; set; }
         public ICollection<Portfolio>? Portfolios { get; set; }

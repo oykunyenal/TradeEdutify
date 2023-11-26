@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,11 @@ namespace TradeEdutify.Domain.Entities
     [Table("Portfolio")]
     public class Portfolio
     {
-        public Guid PortfolioID { get; set; }
+        [Key]
+        public long PortfolioID { get; set; }
         public DateTimeOffset OperationDate { get; set; }
-        public Guid UserID { get; set; }
-        public Guid ShareID { get; set; }
+        public long UserID { get; set; }
+        public long ShareID { get; set; }
 
         [ForeignKey("UserID")]
         public virtual User? User { get; set; }

@@ -23,5 +23,7 @@ namespace TradeEdutify.Persistence
             services.AddTransient<IShareRepository, ShareRepository>();
             services.AddTransient<IPortfolioRepository, PortfolioRepository>();
         }
+
+
     }
 }

@@ -1,12 +1,15 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace TradeEdutify.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,9 +18,10 @@ namespace TradeEdutify.Persistence.Migrations
                 name: "Share",
                 columns: table => new
                 {
-                    ShareID = table.Column<Guid>(type: "uuid", nullable: false),
+                    ShareID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Symbol = table.Column<string>(type: "text", nullable: false),
-                    Rate = table.Column<decimal>(type: "numeric", nullable: false),
+                    Rate = table.Column<double>(type: "double precision", nullable: false),
                     LastUpdateDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -29,7 +33,8 @@ namespace TradeEdutify.Persistence.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    UserID = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Username = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -41,10 +46,11 @@ namespace TradeEdutify.Persistence.Migrations
                 name: "Portfolio",
                 columns: table => new
                 {
-                    PortfolioID = table.Column<Guid>(type: "uuid", nullable: false),
+                    PortfolioID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     OperationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UserID = table.Column<Guid>(type: "uuid", nullable: false),
-                    ShareID = table.Column<Guid>(type: "uuid", nullable: false)
+                    UserID = table.Column<long>(type: "bigint", nullable: false),
+                    ShareID = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,14 +73,15 @@ namespace TradeEdutify.Persistence.Migrations
                 name: "Transaction",
                 columns: table => new
                 {
-                    TransactionID = table.Column<Guid>(type: "uuid", nullable: false),
+                    TransactionID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TradeType = table.Column<int>(type: "integer", nullable: false),
-                    ShareID = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserID = table.Column<Guid>(type: "uuid", nullable: false),
+                    ShareID = table.Column<long>(type: "bigint", nullable: false),
+                    UserID = table.Column<long>(type: "bigint", nullable: false),
                     OperationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    UnitPrice = table.Column<double>(type: "double precision", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
-                    TotalOperationPrice = table.Column<decimal>(type: "numeric", nullable: false)
+                    TotalOperationPrice = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,6 +98,30 @@ namespace TradeEdutify.Persistence.Migrations
                         principalTable: "User",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Share",
+                columns: new[] { "ShareID", "LastUpdateDate", "Rate", "Symbol" },
+                values: new object[,]
+                {
+                    { 100L, new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5352), new TimeSpan(0, 3, 0, 0, 0)), 45.43, "AGT" },
+                    { 101L, new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5386), new TimeSpan(0, 3, 0, 0, 0)), 30.16, "THY" },
+                    { 102L, new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5388), new TimeSpan(0, 3, 0, 0, 0)), 70.319999999999993, "EGS" },
+                    { 103L, new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5390), new TimeSpan(0, 3, 0, 0, 0)), 120.76000000000001, "ODR" },
+                    { 104L, new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5392), new TimeSpan(0, 3, 0, 0, 0)), 12.1, "VHY" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "UserID", "Username" },
+                values: new object[,]
+                {
+                    { 100L, "Ethan Hayes" },
+                    { 101L, "Olivia Foster" },
+                    { 102L, "Amelia Rodriguez" },
+                    { 103L, "Sophia Chang" },
+                    { 104L, "Jackson Bennett" }
                 });
 
             migrationBuilder.CreateIndex(

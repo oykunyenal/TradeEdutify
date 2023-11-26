@@ -12,8 +12,8 @@ using TradeEdutify.Persistence.Context;
 namespace TradeEdutify.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231126091504_initialCreate")]
-    partial class initialCreate
+    [Migration("20231126152559_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,18 +27,20 @@ namespace TradeEdutify.Persistence.Migrations
 
             modelBuilder.Entity("TradeEdutify.Domain.Entities.Portfolio", b =>
                 {
-                    b.Property<Guid>("PortfolioID")
+                    b.Property<long>("PortfolioID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("PortfolioID"));
 
                     b.Property<DateTimeOffset>("OperationDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("ShareID")
-                        .HasColumnType("uuid");
+                    b.Property<long>("ShareID")
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid>("UserID")
-                        .HasColumnType("uuid");
+                    b.Property<long>("UserID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("PortfolioID");
 
@@ -51,15 +53,17 @@ namespace TradeEdutify.Persistence.Migrations
 
             modelBuilder.Entity("TradeEdutify.Domain.Entities.Share", b =>
                 {
-                    b.Property<Guid>("ShareID")
+                    b.Property<long>("ShareID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ShareID"));
 
                     b.Property<DateTimeOffset>("LastUpdateDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("numeric");
+                    b.Property<double>("Rate")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Symbol")
                         .IsRequired()
@@ -68,13 +72,52 @@ namespace TradeEdutify.Persistence.Migrations
                     b.HasKey("ShareID");
 
                     b.ToTable("Share");
+
+                    b.HasData(
+                        new
+                        {
+                            ShareID = 100L,
+                            LastUpdateDate = new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5352), new TimeSpan(0, 3, 0, 0, 0)),
+                            Rate = 45.43,
+                            Symbol = "AGT"
+                        },
+                        new
+                        {
+                            ShareID = 101L,
+                            LastUpdateDate = new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5386), new TimeSpan(0, 3, 0, 0, 0)),
+                            Rate = 30.16,
+                            Symbol = "THY"
+                        },
+                        new
+                        {
+                            ShareID = 102L,
+                            LastUpdateDate = new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5388), new TimeSpan(0, 3, 0, 0, 0)),
+                            Rate = 70.319999999999993,
+                            Symbol = "EGS"
+                        },
+                        new
+                        {
+                            ShareID = 103L,
+                            LastUpdateDate = new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5390), new TimeSpan(0, 3, 0, 0, 0)),
+                            Rate = 120.76000000000001,
+                            Symbol = "ODR"
+                        },
+                        new
+                        {
+                            ShareID = 104L,
+                            LastUpdateDate = new DateTimeOffset(new DateTime(2023, 11, 26, 18, 25, 59, 820, DateTimeKind.Unspecified).AddTicks(5392), new TimeSpan(0, 3, 0, 0, 0)),
+                            Rate = 12.1,
+                            Symbol = "VHY"
+                        });
                 });
 
             modelBuilder.Entity("TradeEdutify.Domain.Entities.Transaction", b =>
                 {
-                    b.Property<Guid>("TransactionID")
+                    b.Property<long>("TransactionID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("TransactionID"));
 
                     b.Property<DateTimeOffset>("OperationDate")
                         .HasColumnType("timestamp with time zone");
@@ -82,20 +125,20 @@ namespace TradeEdutify.Persistence.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ShareID")
-                        .HasColumnType("uuid");
+                    b.Property<long>("ShareID")
+                        .HasColumnType("bigint");
 
-                    b.Property<decimal>("TotalOperationPrice")
-                        .HasColumnType("numeric");
+                    b.Property<double>("TotalOperationPrice")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("TradeType")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("numeric");
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("double precision");
 
-                    b.Property<Guid>("UserID")
-                        .HasColumnType("uuid");
+                    b.Property<long>("UserID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("TransactionID");
 
@@ -108,9 +151,11 @@ namespace TradeEdutify.Persistence.Migrations
 
             modelBuilder.Entity("TradeEdutify.Domain.Entities.User", b =>
                 {
-                    b.Property<Guid>("UserID")
+                    b.Property<long>("UserID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("UserID"));
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -119,6 +164,33 @@ namespace TradeEdutify.Persistence.Migrations
                     b.HasKey("UserID");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 100L,
+                            Username = "Ethan Hayes"
+                        },
+                        new
+                        {
+                            UserID = 101L,
+                            Username = "Olivia Foster"
+                        },
+                        new
+                        {
+                            UserID = 102L,
+                            Username = "Amelia Rodriguez"
+                        },
+                        new
+                        {
+                            UserID = 103L,
+                            Username = "Sophia Chang"
+                        },
+                        new
+                        {
+                            UserID = 104L,
+                            Username = "Jackson Bennett"
+                        });
                 });
 
             modelBuilder.Entity("TradeEdutify.Domain.Entities.Portfolio", b =>
