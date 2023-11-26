@@ -19,7 +19,7 @@ namespace TradeEdutify.Persistence.Repositories
             _dbContext = dBContext;
         }
 
-        public async Task<List<Share>> Update(List<Share> entityList)
+        public async Task<List<Share>> UpdateShare(List<Share> entityList)
         {
             await _dbContext.AddRangeAsync(entityList);
             await _dbContext.SaveChangesAsync();
@@ -28,7 +28,7 @@ namespace TradeEdutify.Persistence.Repositories
 
         public async Task<List<Share>> GetShareList()
         {
-            return await _dbContext.Shares.ToListAsync();
+            return await _dbContext.Shares.AsNoTracking().ToListAsync();
         }
     }
 }

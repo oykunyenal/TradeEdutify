@@ -16,10 +16,10 @@ namespace TradeEdutify.API.Controllers
         private readonly IMediator mediator;
         private ApiServiceResponse apiServiceResponse;
 
-        public ShareController(IMediator mediator, ApiServiceResponse apiServiceResponse)
+        public ShareController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.apiServiceResponse = apiServiceResponse;
+            apiServiceResponse = new ApiServiceResponse();
         }
 
         [HttpPost("UpdateShare")]

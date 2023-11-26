@@ -9,6 +9,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TradeEdutify.Application.Dtos;
+using TradeEdutify.Application.Interfaces.Services;
+using TradeEdutify.Application.Services;
 using TradeEdutify.Application.Validations;
 
 namespace TradeEdutify.Application
@@ -21,10 +23,13 @@ namespace TradeEdutify.Application
             services.AddAutoMapper(assembly);
             services.AddMediatR(opt => opt.RegisterServicesFromAssemblies(assembly));
 
+            services.AddSingleton<ITokenService, TokenService>();
+
             services.AddTransient<IValidator<UserDto>, UserValidator>();
             services.AddTransient<IValidator<TransactionDto>, TransactionValidator>();
             services.AddTransient<IValidator<PortfolioDto>, PortfolioValidator>();
             services.AddTransient<IValidator<ShareDto>, ShareValidator>();
+            services.AddTransient<IValidator<List<ShareDto>>, ShareListValidator>();
         }
     }
 }
