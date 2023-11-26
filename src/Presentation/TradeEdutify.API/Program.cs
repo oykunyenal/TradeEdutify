@@ -1,3 +1,5 @@
+using TradeEdutify.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var environmentName = builder.Configuration.GetSection("ASPNETCORE_ENVIRONMENT").Value;
@@ -8,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddPersistenceRegistration(builder.Configuration);
 
 var app = builder.Build();
 

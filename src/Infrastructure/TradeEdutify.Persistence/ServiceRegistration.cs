@@ -15,12 +15,6 @@ namespace TradeEdutify.Persistence
         public static void AddPersistenceRegistration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-
-            using (var serviceScope = services.BuildServiceProvider().CreateScope())
-            {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
-                dbContext.Database.Migrate();
-            }
         }
     }
 }

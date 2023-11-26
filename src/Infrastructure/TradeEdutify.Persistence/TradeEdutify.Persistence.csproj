@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\TradeEdutify.Domain\TradeEdutify.Domain.csproj" />
-    <ProjectReference Include="..\..\Presentation\TradeEdutify.API\TradeEdutify.API.csproj" />
   </ItemGroup>
 
 </Project>
