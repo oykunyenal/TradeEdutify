@@ -20,4 +20,11 @@
     <ProjectReference Include="..\TradeEdutify.Domain\TradeEdutify.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Queries\ShareQueries\" />
+    <Folder Include="Features\Queries\PortfolioQueries\" />
+    <Folder Include="Features\Queries\TransactionQueries\" />
+    <Folder Include="Features\Queries\UserQueries\" />
+  </ItemGroup>
+
 </Project>
