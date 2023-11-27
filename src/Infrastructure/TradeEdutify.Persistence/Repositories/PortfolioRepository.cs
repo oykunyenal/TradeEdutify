@@ -39,18 +39,13 @@ namespace TradeEdutify.Persistence.Repositories
 
         public async Task<List<Portfolio>> GetPortfolioListForUser(string Username)
         {
-            var portfolioList = _dbContext.Portfolios
-                .Join(
-                    _dbContext.Users,
-                    portfolio => portfolio.UserID,
-                    user => user.UserID,
-                    (portfolio, user) => new { Portfolio = portfolio, User = user }
-                )
-                .Where(joinResult => joinResult.User.Username == Username)
-                .Select(joinResult => joinResult.Portfolio)
-                .ToList();
+            var portfolioList = await _dbContext.Portfolios
+                .PortfolioWithRelations()
+                .ToListAsync();
 
-            return portfolioList;
+            var filteredList = portfolioList.Where(q => q.User.Username.Equals(Username)).ToList();
+
+            return filteredList;
         }
     }
 }
