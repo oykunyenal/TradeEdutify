@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TradeEdutify.Application.Interfaces.Services;
 using TradeEdutify.Application.Parameters;
-using TradeEdutify.Application.Services;
 
 namespace TradeEdutify.API.Controllers
 {
@@ -10,17 +8,16 @@ namespace TradeEdutify.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-
-        private readonly ITokenService tokenService;
+        private readonly ITokenService _tokenService;
         public UserController(ITokenService tokenService)
         {
-            this.tokenService = tokenService;
+            _tokenService = tokenService;
         }
 
         [HttpPost("GetToken")]
         public IActionResult GetAuthToken(string Username)
         {
-            var TokenResponse = tokenService.GenerateToken(Username);
+            var TokenResponse = _tokenService.GenerateToken(Username);
 
             ApiServiceResponse apiServiceResponse = new ApiServiceResponse
             {

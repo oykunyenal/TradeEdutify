@@ -1,34 +1,29 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TradeEdutify.API.Controllers.Base;
 using TradeEdutify.Application.Features.Queries.PortfolioQueries;
-using TradeEdutify.Application.Parameters;
 
 namespace TradeEdutify.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController, Authorize]
-    public class PortfolioController : ControllerBase
+    public class PortfolioController : BaseController
     {
-        private readonly IMediator mediator;
-        private ApiServiceResponse apiServiceResponse;
-        private string userClaim;
-
+        private readonly IMediator _mediator;
         public PortfolioController(IMediator mediator)
         {
-            this.mediator = mediator;
-            apiServiceResponse = new ApiServiceResponse();
+            _mediator = mediator;
         }
 
         [HttpGet("GetPortfolioListForCustomer")]
         public async Task<IActionResult> GetPortfolioListForCustomer()
         {
-            userClaim = HttpContext.User.Claims.FirstOrDefault().Value;
+            userClaim = HttpContext.User.Claims.FirstOrDefault()?.Value ?? "";
 
             var GetPortfolioListForCustomerQuery = new GetPortfolioListForCustomerQuery(userClaim);
 
-            apiServiceResponse = await mediator.Send(GetPortfolioListForCustomerQuery);
+            apiServiceResponse = await _mediator.Send(GetPortfolioListForCustomerQuery);
 
             if (!apiServiceResponse.Result)
             {

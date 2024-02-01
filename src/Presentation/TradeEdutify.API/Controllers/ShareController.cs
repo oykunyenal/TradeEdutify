@@ -2,26 +2,21 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TradeEdutify.API.Controllers.Base;
 using TradeEdutify.Application.Dtos;
 using TradeEdutify.Application.Features.Queries.ShareQueries;
-using TradeEdutify.Application.Parameters;
 using TradeEdutify.Application.Parameters.RequestParameters;
 
 namespace TradeEdutify.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController, Authorize]
-    public class ShareController : ControllerBase
+    public class ShareController : BaseController
     {
-
         private readonly IMediator mediator;
-        private ApiServiceResponse apiServiceResponse;
-        private string userClaim;
-
         public ShareController(IMediator mediator)
         {
             this.mediator = mediator;
-            apiServiceResponse = new ApiServiceResponse();
         }
 
         [HttpPost("UpdateShare")]
@@ -57,7 +52,7 @@ namespace TradeEdutify.API.Controllers
         [HttpPost("BuyShare")]
         public async Task<IActionResult> BuyShare(ShareTransactionRequestModel shareTransactionRequestModel)
         {
-            userClaim = HttpContext.User.Claims.FirstOrDefault().Value;
+            userClaim = HttpContext.User.Claims.FirstOrDefault()?.Value ?? "";
 
             var BuyShareQuery = new BuyShareQuery(shareTransactionRequestModel, userClaim);
 
@@ -74,7 +69,7 @@ namespace TradeEdutify.API.Controllers
         [HttpPost("SellShare")]
         public async Task<IActionResult> SellShare(ShareTransactionRequestModel shareTransactionRequestModel)
         {
-            userClaim = HttpContext.User.Claims.FirstOrDefault().Value;
+            userClaim = HttpContext.User.Claims.FirstOrDefault()?.Value ?? "";
 
             var SellShareQuery = new SellShareQuery(shareTransactionRequestModel, userClaim);
 
@@ -87,7 +82,5 @@ namespace TradeEdutify.API.Controllers
 
             return Ok(apiServiceResponse);
         }
-
-
     }
 }
