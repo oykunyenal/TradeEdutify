@@ -11,13 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{16386BFA-30A7-446A-B29D-6E3F630D6AA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeEdutify.API", "src\Presentation\TradeEdutify.API\TradeEdutify.API.csproj", "{57AE8C65-6F00-4AD0-A27A-2319BF28259D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeEdutify.API", "src\Presentation\TradeEdutify.API\TradeEdutify.API.csproj", "{57AE8C65-6F00-4AD0-A27A-2319BF28259D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeEdutify.Persistence", "src\Infrastructure\TradeEdutify.Persistence\TradeEdutify.Persistence.csproj", "{55570BFE-9C5E-4C06-BB57-ADD2BB7518F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeEdutify.Persistence", "src\Infrastructure\TradeEdutify.Persistence\TradeEdutify.Persistence.csproj", "{55570BFE-9C5E-4C06-BB57-ADD2BB7518F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeEdutify.Domain", "src\Core\TradeEdutify.Domain\TradeEdutify.Domain.csproj", "{186820F3-A1F3-4B85-852D-FF2DDC05C4D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeEdutify.Domain", "src\Core\TradeEdutify.Domain\TradeEdutify.Domain.csproj", "{186820F3-A1F3-4B85-852D-FF2DDC05C4D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeEdutify.Application", "src\Core\TradeEdutify.Application\TradeEdutify.Application.csproj", "{10966959-0BEC-40EC-B52C-B705339C6BD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeEdutify.Application", "src\Core\TradeEdutify.Application\TradeEdutify.Application.csproj", "{10966959-0BEC-40EC-B52C-B705339C6BD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{29755276-DBD2-4FFC-8287-51BA2D962BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeEdutify.Test", "src\Test\TradeEdutify.Test\TradeEdutify.Test.csproj", "{4FD1A35C-F572-489D-A180-BC5EC188A31A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{10966959-0BEC-40EC-B52C-B705339C6BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10966959-0BEC-40EC-B52C-B705339C6BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10966959-0BEC-40EC-B52C-B705339C6BD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD1A35C-F572-489D-A180-BC5EC188A31A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD1A35C-F572-489D-A180-BC5EC188A31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD1A35C-F572-489D-A180-BC5EC188A31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD1A35C-F572-489D-A180-BC5EC188A31A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +61,8 @@ Global
 		{55570BFE-9C5E-4C06-BB57-ADD2BB7518F8} = {82F4826C-AD0A-4612-AE6A-5DDD56EEDB74}
 		{186820F3-A1F3-4B85-852D-FF2DDC05C4D4} = {D44D68AD-091A-4F6B-811B-E717184264BD}
 		{10966959-0BEC-40EC-B52C-B705339C6BD6} = {D44D68AD-091A-4F6B-811B-E717184264BD}
+		{29755276-DBD2-4FFC-8287-51BA2D962BE5} = {982B8D4C-7564-4D62-B14A-5085C978D3D1}
+		{4FD1A35C-F572-489D-A180-BC5EC188A31A} = {29755276-DBD2-4FFC-8287-51BA2D962BE5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E880C9ED-705F-4C1C-82EB-BB3C0B2F1F87}

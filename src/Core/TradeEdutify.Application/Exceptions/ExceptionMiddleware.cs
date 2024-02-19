@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TradeEdutify.Application.Exceptions
 {
@@ -13,6 +8,7 @@ namespace TradeEdutify.Application.Exceptions
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
+
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _next = next;
@@ -73,6 +69,5 @@ namespace TradeEdutify.Application.Exceptions
             // Log the NullReferenceException with context information
             _logger.LogError(validationExceptionEx, "A ValidationException occurred: {RequestUrl} ({RequestMethod})", requestUrl, requestMethod);
         }
-
     }
 }

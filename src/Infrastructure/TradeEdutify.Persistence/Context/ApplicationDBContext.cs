@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TradeEdutify.Domain.Entities;
 
 namespace TradeEdutify.Persistence.Context
@@ -13,14 +7,12 @@ namespace TradeEdutify.Persistence.Context
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
-
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Share> Shares { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -89,8 +81,6 @@ namespace TradeEdutify.Persistence.Context
                 }
                 );
 
-
-
             modelBuilder.Entity<Portfolio>().HasData(new Portfolio
             {
                 ShareID = 100,
@@ -126,7 +116,6 @@ namespace TradeEdutify.Persistence.Context
                 PortfolioID = 104,
                 OperationDate = DateTime.Now,
             });
-
 
             modelBuilder.Entity<Transaction>().HasData(new Transaction
             {
@@ -198,7 +187,5 @@ namespace TradeEdutify.Persistence.Context
 
             base.OnModelCreating(modelBuilder);
         }
-
-
     }
 }

@@ -11,6 +11,7 @@ namespace TradeEdutify.API.Controllers
     public class PortfolioController : BaseController
     {
         private readonly IMediator _mediator;
+
         public PortfolioController(IMediator mediator)
         {
             _mediator = mediator;

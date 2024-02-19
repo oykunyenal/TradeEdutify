@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TradeEdutify.Domain.Entities;
-
-namespace TradeEdutify.Application.Dtos
+﻿namespace TradeEdutify.Application.Dtos
 {
     public record ShareDto
     {

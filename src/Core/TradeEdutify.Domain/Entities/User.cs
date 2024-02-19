@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TradeEdutify.Domain.Entities
 {
@@ -19,6 +14,7 @@ namespace TradeEdutify.Domain.Entities
 
         [Key]
         public long UserID { get; set; }
+
         public string Username { get; set; } = string.Empty;
         public ICollection<Transaction>? Transactions { get; set; }
         public ICollection<Portfolio>? Portfolios { get; set; }

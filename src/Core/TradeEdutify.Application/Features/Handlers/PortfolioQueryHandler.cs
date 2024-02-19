@@ -1,9 +1,4 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TradeEdutify.Application.Features.Queries.PortfolioQueries;
 using TradeEdutify.Application.Interfaces.Repositories;
 using TradeEdutify.Application.Parameters;
@@ -14,11 +9,13 @@ namespace TradeEdutify.Application.Features.Handlers
     {
         private readonly IPortfolioRepository portfolioRepository;
         private ApiServiceResponse apiServiceResponse;
+
         public PortfolioQueryHandler(IPortfolioRepository portfolioRepository)
         {
             this.portfolioRepository = portfolioRepository;
             apiServiceResponse = new ApiServiceResponse();
         }
+
         public async Task<ApiServiceResponse> Handle(GetPortfolioListForCustomerQuery request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.Username))
@@ -26,7 +23,7 @@ namespace TradeEdutify.Application.Features.Handlers
                 throw new ArgumentNullException(nameof(request.Username), "GetPortfolioListForCustomerQuery Handle -> Username in request can not be null");
             }
 
-            var portfolioListForUser = await portfolioRepository.GetPortfolioListForUser(request.Username.Replace(" ",""));
+            var portfolioListForUser = await portfolioRepository.GetPortfolioListForUser(request.Username.Replace(" ", ""));
 
             if (portfolioListForUser is null)
             {

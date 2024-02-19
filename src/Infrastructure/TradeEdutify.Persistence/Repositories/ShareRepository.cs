@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TradeEdutify.Application.Interfaces.Repositories;
 using TradeEdutify.Domain.Entities;
 using TradeEdutify.Persistence.Context;
@@ -38,7 +33,6 @@ namespace TradeEdutify.Persistence.Repositories
                 .OrderByDescending(s => s.LastUpdateDate)
                 .FirstOrDefaultAsync();
         }
-
 
         public bool ShareUpdateAvailable(List<Share> entityList)
         {

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TradeEdutify.Application.Dtos
+﻿namespace TradeEdutify.Application.Dtos
 {
     public record UserDto
     {
-
         public UserDto()
         {
             this.TransactionDtoList = new List<TransactionDto>();

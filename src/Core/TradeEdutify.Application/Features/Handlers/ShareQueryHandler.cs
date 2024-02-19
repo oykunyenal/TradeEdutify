@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using FluentValidation.TestHelper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TradeEdutify.Application.Dtos;
 using TradeEdutify.Application.Features.Queries.ShareQueries;
 using TradeEdutify.Application.Interfaces.Repositories;
@@ -82,7 +76,6 @@ namespace TradeEdutify.Application.Features.Handlers
                 return Task.FromResult(apiServiceResponse).Result;
             }
 
-
             var updatedShareList = await shareRepository.UpdateShare(shareListOnUpdate);
 
             if (!updatedShareList.Any())
@@ -130,7 +123,6 @@ namespace TradeEdutify.Application.Features.Handlers
             };
 
             return Task.FromResult(apiServiceResponse).Result;
-
         }
 
         public async Task<ApiServiceResponse> Handle(BuyShareQuery request, CancellationToken cancellationToken)

@@ -9,6 +9,7 @@ namespace TradeEdutify.Domain.Entities
     {
         [Key]
         public long TransactionID { get; set; }
+
         public TradeType TradeType { get; set; }
         public long ShareID { get; set; }
         public long UserID { get; set; }
@@ -16,6 +17,7 @@ namespace TradeEdutify.Domain.Entities
 
         [RegularExpression(@"^\d+\.\d{2}$", ErrorMessage = "The UnitPrice should be exactly 2 double digits.")]
         public double UnitPrice { get; set; }
+
         public int Quantity { get; set; }
 
         [RegularExpression(@"^\d+\.\d{2}$", ErrorMessage = "The TotalOperationPrice should be exactly 2 double digits.")]

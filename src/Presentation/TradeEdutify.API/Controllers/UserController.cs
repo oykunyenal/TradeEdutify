@@ -9,6 +9,7 @@ namespace TradeEdutify.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly ITokenService _tokenService;
+
         public UserController(ITokenService tokenService)
         {
             _tokenService = tokenService;

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TradeEdutify.API.Controllers.Base;
 using TradeEdutify.Application.Dtos;
@@ -14,6 +13,7 @@ namespace TradeEdutify.API.Controllers
     public class ShareController : BaseController
     {
         private readonly IMediator mediator;
+
         public ShareController(IMediator mediator)
         {
             this.mediator = mediator;
